@@ -1,0 +1,38 @@
+[package]
+name = "dish-logger"
+version = "0.1.0"
+edition = "2018"
+
+
+[lib]
+name = "dish_logger"
+crate-type = ["dylib"]
+
+[features]
+async = []
+debug = []
+
+[dependencies]
+libc = "0.2.*"
+regex = "1.5.*"
+sysinfo = "0.20.*"
+futures = "0.3.17"
+
+[dependencies.tokio]
+version = "1.13.0"
+features = [
+    "rt-multi-thread",
+    "sync",
+]
+
+[profile.dev]
+opt-level = 3
+incremental = true
+
+[profile.release]
+opt-level = 3
+debug = false
+lto = true
+panic = "abort"
+codegen-units = 1
+rpath = false
